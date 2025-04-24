@@ -1,54 +1,105 @@
-# React + TypeScript + Vite
+# ⚡ Frontend Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A decentralized application (dApp) built using React + TypeScript for **Energiswap**, showcasing token prices and wallet information via Metamask. It includes account switching, formatted values, and light/dark theme support.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📁 Project Structure
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+├── public/
+├── src/
+│   ├── assets/             # Token icons and SVGs
+│   ├── components/         # UI components
+│   │   ├── Home            # Contains components for Home page
+│   │   └── Wallet          # Contains components fro Wallet page
+│   ├── context/            # Wallet context using ethers.js
+│   │   └── WalletContext.tsx
+│   ├── types/              # Type definitions
+│   ├── utils/              # Utility functions (formatting, icons)
+│   └── App.tsx             # Main app component with routing
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 1. Clone & Install
+
+```bash
+git clone https://github.com/your-username/energiswap-dapp.git
+cd energiswap-dapp
+yarn
 ```
+
+### 2. Run the App
+
+```bash
+yarn start
+```
+
+---
+
+## 🧩 Features
+
+### 🏠 Home Tab
+
+- Displays token list with:
+  - Icon
+  - Name
+  - Ticker
+  - Price (USD)
+- Columns are **sortable**
+
+### 👛 Wallet Tab
+
+- Connect with **Metamask**
+- Shows:
+  - Wallet address
+  - NRG token balance
+  - Converted USD value
+- Allows **copy to clipboard**
+- Automatically updates when **accounts are switched**
+
+### 🌗 Theme Toggle
+
+- Switch between **light and dark** mode
+
+---
+
+## 🔗 Blockchain Integration
+
+- Built using `ethers.js` for wallet connectivity
+- Currently uses **Energi chain ID: 39797**
+- Wallet updates via `window.ethereum.on("accountsChanged")`
+
+---
+
+## 📦 Dependencies
+
+- React + TypeScript
+- Tailwind CSS
+- Ethers.js
+- DaisyUI (optional, for design elements)
+
+---
+
+## 📄 Notes
+
+- Token prices are fetched from Energiswap API (or mocked if API unavailable)
+- USD values are calculated via a hardcoded or dynamic conversion rate
+- Icons dynamically rendered from `/assets` based on token symbol
+
+---
+
+## 🧑‍💻 Author
+
+**Adil Hashmi**  
+📧 hashmiadil161@gmail.com  
+💼 [LinkedIn](https://www.linkedin.com/in/adilhashmi/)
+
+---
+
+## 🫡 Special Thanks
+
+Thanks to the Energi team for this challenge opportunity!
