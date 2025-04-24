@@ -10,7 +10,6 @@ export const getIconBySymbol = (symbol: string): string | undefined => {
 
 export const formateCurrency = (amount: number, currency: string) => {
   const formatedCurrency = new Intl.NumberFormat("en-US", {
-    style: "currency",
     currency,
   }).format(amount);
   return formatedCurrency;

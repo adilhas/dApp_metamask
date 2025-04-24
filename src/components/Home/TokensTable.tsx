@@ -78,7 +78,7 @@ const TokensTable = ({ tokenArr }: Props) => {
                 {tokenData?.name}
               </td>
               <td>{tokenData?.symbol}</td>
-              <td>{formattedPrice}</td>
+              <td>${formattedPrice}</td>
             </tr>
           );
         })}

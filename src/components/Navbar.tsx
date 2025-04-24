@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { setAppTheme } from "../utils/theme";
 
 const Navbar = () => {
@@ -25,7 +25,6 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -49,12 +48,30 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to={"/"}>Home</Link>
+          <li className="mx-1">
+            <NavLink
+              to={"/"}
+              className={({ isActive }) =>
+                isActive
+                  ? "border-b-2 border-green-500  font-medium"
+                  : "hover:border-b-2 hover:border-green-300 text-base-content"
+              }
+            >
+              Home
+            </NavLink>
           </li>
 
-          <li>
-            <Link to="wallet">Wallet</Link>
+          <li className="mx-1">
+            <NavLink
+              to="/wallet"
+              className={({ isActive }) =>
+                isActive
+                  ? "border-b-2 border-green-500  font-medium"
+                  : "hover:border-b-2 hover:border-green-300 text-base-content"
+              }
+            >
+              Wallet
+            </NavLink>
           </li>
         </ul>
       </div>
