@@ -24,15 +24,7 @@ A decentralized application (dApp) built using React + TypeScript for **Energisw
 
 ## 🚀 Getting Started
 
-### 1. Clone & Install
-
-```bash
-git clone https://github.com/your-username/energiswap-dapp.git
-cd energiswap-dapp
-yarn
-```
-
-### 2. Run the App
+### Run the App
 
 ```bash
 yarn start
