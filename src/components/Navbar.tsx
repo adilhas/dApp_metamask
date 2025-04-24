@@ -1,9 +1,20 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { setAppTheme } from "../utils/theme";
 
 const Navbar = () => {
+  const [theme, setTheme] = useState<string>(() => setAppTheme());
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-sm w-full">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -35,7 +46,6 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -49,7 +59,13 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <button
+          className="btn btn-ghost"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+        >
+          {theme === "light" ? <span>🌙</span> : <span>☀️</span>}
+        </button>
       </div>
     </div>
   );
