@@ -12,9 +12,7 @@ const ConnectWallet = () => {
           className="w-full"
         />
       </div>
-
       <h1 className="text-3xl sm:text-5xl font-bold mb-6">METAMASK</h1>
-
       <button
         onClick={connectWallet}
         className="px-6 py-3 rounded transition btn btn-success text-lg sm:text-xl text-white"

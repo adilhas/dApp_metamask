@@ -6,6 +6,7 @@ interface WalletContextType {
   address: string | null;
   balance: string;
   isConnected: boolean;
+  loading: boolean;
 }
 
 const WalletContext = createContext<WalletContextType | null>(null);
@@ -22,7 +23,6 @@ const switchToEnergiNetwork = async () => {
     });
   } catch (switchError) {
     if ((switchError as { code: number }).code === 4902) {
-      // Add Energi Network if not found
       await window.ethereum?.request({
         method: "wallet_addEthereumChain",
         params: [
@@ -49,14 +49,14 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
   const [address, setAddress] = useState<string | null>(null);
   const [balance, setBalance] = useState("0");
   const [isConnected, setIsConnected] = useState(false);
+  const [loading, setLoading] = useState(true); // <- NEW loading state
 
   const connectWallet = async () => {
     if (!window.ethereum) return alert("Please install Metamask!");
 
-    await switchToEnergiNetwork(); // ensure Energi network is selected
+    await switchToEnergiNetwork();
 
     const provider = new ethers.BrowserProvider(window.ethereum);
-
     const accounts = await provider.send("eth_requestAccounts", []);
     const account = accounts[0];
     const bal = await provider.getBalance(account);
@@ -77,9 +77,35 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    if (window.ethereum) {
+    const checkIfWalletIsConnected = async () => {
+      if (!window.ethereum) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        await switchToEnergiNetwork();
+
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const accounts = await provider.listAccounts();
+
+        if (accounts.length > 0) {
+          const account = accounts[0].address;
+          const bal = await provider.getBalance(account);
+          setAddress(account);
+          setBalance(ethers.formatEther(bal));
+          setIsConnected(true);
+        }
+      } catch (error) {
+        console.error("Failed to auto-connect wallet:", error);
+      } finally {
+        setLoading(false); // <- Stop loading after check
+      }
+
       window.ethereum.on("accountsChanged", handleAccountsChanged);
-    }
+    };
+
+    checkIfWalletIsConnected();
 
     return () => {
       if (window.ethereum) {
@@ -93,7 +119,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <WalletContext.Provider
-      value={{ connectWallet, address, balance, isConnected }}
+      value={{ connectWallet, address, balance, isConnected, loading }}
     >
       {children}
     </WalletContext.Provider>
