@@ -88,7 +88,7 @@ yarn start
 
 **Adil Hashmi**  
 📧 hashmiadil161@gmail.com  
-💼 [LinkedIn]([https://www.linkedin.com/in/adilhashmi/](https://www.linkedin.com/in/adilhash/))
+💼 [https://www.linkedin.com/in/adilhash/](https://www.linkedin.com/in/adilhash/)
 
 ---
 
